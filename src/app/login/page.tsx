@@ -1,12 +1,14 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
 import { User, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import LoadingLogin from '@/components/loading-login'
 
 export default function LoginPage() {
 
@@ -58,26 +60,29 @@ export default function LoginPage() {
     setUser(null)
   }
 
-  if (loading) return <h2>Loading ---</h2>
+  const isDisabled = email.length === 0 || password.length === 0
+
+  if (loading) return <LoadingLogin />
 
   if (user) {
     return (
-      <>
-        <h1>Ya iniciaste sesion</h1>
-        <button onClick={handleSignOut}>Cerrar sesion</button>
-      </>
+      <main className='text-white h-screen flex flex-col justify-center items-center gap-3 bg-gray-800 p-4'>
+        <h1>Ya iniciaste sesion, ve al <Button className={cn("font-semibold text-base text-white")} variant="link" asChild><Link href="/">Inicio</Link></Button></h1>
+        <Button variant="secondary" onClick={handleSignOut}>Cerrar sesion</Button>
+      </main>
     )
   }
 
   return (
     <main className='h-screen flex items-center justify-center bg-gray-800 p-4'>
-      <div className='bg-gray-900 p-8 rounded-lg shadow-md w-96'>
+      <div className='bg-gray-900 p-8 grid gap-4 rounded-lg shadow-md w-96'>
         <div className='grid w-full max-w-sm items-center gap-1.5'>
-          <Label htmlFor='email'>Email</Label>
+          <Label className={cn("text-white")} htmlFor='email'>Email</Label>
           <Input
             type='email'
             id='email'
             name='email'
+            required
             placeholder='email@example.com'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -85,20 +90,21 @@ export default function LoginPage() {
         </div>
 
         <div className='grid w-full max-w-sm items-center gap-1.5'>
-          <Label htmlFor='password'>Password</Label>
+          <Label className={cn("text-white")} htmlFor='password'>Password</Label>
           <Input
             type='password'
             id='password'
             name='password'
+            required
             placeholder='* * * * * * * * * *'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <div className='grid items-center space-y-4'>
-          <Button className={cn("bg-blue-600 focus:bg-blue-700")} onClick={handleSignIn}>Iniciar Sesión</Button>
-          <Button variant="secondary" onClick={handleSignUp}>Registrarse</Button>
+        <div className='grid items-center space-y-2'>
+          <Button disabled={isDisabled} className={cn("bg-blue-700 hover:bg-blue-900 focus:bg-blue-800")} onClick={handleSignIn}>Iniciar Sesión</Button>
+          <Button disabled={true} variant="outline" onClick={handleSignUp}>Registrarse</Button>
         </div>
       </div>
     </main>

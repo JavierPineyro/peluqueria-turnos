@@ -10,6 +10,8 @@ export default async function Home() {
     redirect('/login')
   }
 
+  redirect("/dashboard")
+
   return (
     <main>Holi</main>
   )
