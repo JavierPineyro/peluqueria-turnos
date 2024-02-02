@@ -13,6 +13,6 @@ export default async function Home() {
   redirect("/dashboard")
 
   return (
-    <main>Holi</main>
+    <main>Redireccionando...</main>
   )
 }

@@ -1,5 +1,11 @@
+import Calendar from "@/components/calendar";
+
 export default function DashboardPage() {
+
   return (
-    <div>DashboardPage</div>
+    <section className="grid items-center p-4">
+      <h1>Calendario</h1>
+      <Calendar />
+    </section>
   )
 }
