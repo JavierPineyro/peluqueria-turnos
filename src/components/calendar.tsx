@@ -3,12 +3,28 @@
 import dayjs from "dayjs"
 import { Calendar, dayjsLocalizer } from "react-big-calendar"
 import "react-big-calendar/lib/css/react-big-calendar.css"
+import 'dayjs/locale/es'
+import "@/styles/calendar.css"
 
 export default function BigCalendar() {
+  dayjs.locale('es')
+  const labels = {
+    today: "Hoy",
+    previous: "Anterior",
+    next: "Siguiente",
+    month: "Mes",
+    week: "Semana",
+    day: "Dia",
+    agenda: "Agenda",
+    date: "Fecha",
+    time: "Hora",
+    event: "Evento",
+    noEventsInRange: "No hay eventos en este rango",
+    showMore: (total: number) => `+ Ver mas (${total})`,
+  }
   return (
     <div className="text-white" style={{ height: "80vh" }}>
       <Calendar
-        style={{ color: "white" }}
         length={1}
         localizer={dayjsLocalizer(dayjs)}
         events={[
@@ -20,19 +36,9 @@ export default function BigCalendar() {
         ]}
         views={["day", "agenda"]}
         defaultView="day"
-        messages={{
-          today: "Hoy",
-          previous: "Anterior",
-          next: "Siguiente",
-          month: "Mes",
-          week: "Semana",
-          day: "Dia",
-          agenda: "Agenda",
-          date: "Fecha",
-          time: "Hora",
-          event: "Evento",
-          noEventsInRange: "No hay eventos en este rango",
-          showMore: total => `+ Ver mas (${total})`,
+        messages={labels}
+        formats={{
+          dayHeaderFormat: date => dayjs(date).format("ddd - DD MMMM, YYYY")
         }}
       />
     </div>
