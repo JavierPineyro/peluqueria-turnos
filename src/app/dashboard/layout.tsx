@@ -34,7 +34,7 @@ export default async function DashboardLayout({
             </ul>
             <Dropdown user={user.email} />
           </header>
-          <main className='bg-gray-950 p-2 h-full grow'>
+          <main className='bg-neutral-950 p-2 h-full grow'>
             {children}
           </main>
         </div>
