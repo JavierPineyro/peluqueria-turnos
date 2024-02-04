@@ -1,31 +1,35 @@
 .rbc-today{
-  background-color: var(--agenda-bg-today);
+  background-color: var(--agenda-bg-today) !important;
 }
 
 .rbc-day-slot .rbc-time-slot{
-  border-top: 1px solid var(--button-agenda-separator-color);
+  border-top: 1px solid var(--button-agenda-separator-color) !important;
 }
 
 .rbc-timeslot-group{
-  border-bottom: 1px solid var(--button-agenda-separator-color);
-  min-height: 50px;
+  border-bottom: 1px solid var(--button-agenda-separator-color) !important;
+  min-height: 50px !important; 
 }
 
 .rbc-toolbar button{
-  color: white;
+  color: white !important;
 }
 
 .rbc-toolbar button:hover{
-  transition: background-color 200ms ease-in;
-
+  transition: background-color 200ms ease-in !important;
+  color: #000 !important;
 }
 
 .rbc-toolbar button:active, .rbc-toolbar button.rbc-active{
-  color: white;
-  background-color: var(--button-agenda-active-bg);
+  color: white !important;
+  background-color: var(--button-agenda-active-bg) !important;
 }
 
 .rbc-toolbar-label{
-  color: var(--button-agenda-active-bg);
-  font-weight: bold;
+  color: var(--button-agenda-active-bg) !important;
+  font-weight: bold !important;
+}
+
+.rbc-current-time-indicator{
+  background-color: rgb(219, 20, 20) !important;
 }
