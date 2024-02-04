@@ -9,6 +9,7 @@ import {
 import LogOutButton from "@/components/logout.client";
 
 import { Settings } from 'lucide-react'
+import Link from "next/link";
 
 export default function Dropdown({ user = "usuario" }: { user: string | undefined }) {
 
@@ -21,7 +22,7 @@ export default function Dropdown({ user = "usuario" }: { user: string | undefine
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
           <DropdownMenuLabel>
-            Precios
+            <Link href="/dashboard/precios">Precios</Link>
           </DropdownMenuLabel>
         </DropdownMenuItem>
         <DropdownMenuSeparator></DropdownMenuSeparator>
