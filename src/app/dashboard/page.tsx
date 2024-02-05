@@ -1,4 +1,5 @@
 import Calendar from "@/components/calendar";
+import CrearTurno from "@/components/crear-turno";
 import { Events } from "@/lib/types";
 import { mapEventResponse } from "@/lib/utils";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -11,11 +12,12 @@ export default async function DashboardPage() {
 
   const events = mapEventResponse(data)
 
-  // Pass the data into de Calendar component and put it in Event attribute
-  console.log("dataaa", events)
   return (
-    <section className="grid items-center p-4">
-      <h1>Calendario</h1>
+    <section className="grid items-center p-3">
+      <div className="flex justify-between items-center">
+        <h1 className="text-white font-semibold text-md">Calendario</h1>
+        <CrearTurno />
+      </div>
       <Calendar events={events} />
     </section>
   )

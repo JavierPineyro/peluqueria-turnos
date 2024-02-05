@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" >
-      <body className={`${latoFont.className} bg-black`}>
+      <body className={`${latoFont.className} bg-black dark`}>
         {children}
       </body>
     </html >
