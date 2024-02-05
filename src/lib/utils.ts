@@ -11,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 
 dayjs.locale("es");
 export function mapEventResponse(data: Events): Event[] {
-  return data.map(({ title, start, end, id, status, services }) => {
+  return data?.map(({ title, start, end, id, status, services }) => {
     return {
       title,
       start: new Date(start),
@@ -26,5 +26,13 @@ export function mapEventResponse(data: Events): Event[] {
         },
       },
     };
+  });
+}
+
+export function formatPrice(price: number) {
+  return price.toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    maximumSignificantDigits: 4,
   });
 }

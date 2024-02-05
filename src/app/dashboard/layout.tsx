@@ -24,7 +24,7 @@ export default async function DashboardLayout({
 
   return (
     <html lang="es">
-      <body>
+      <body className='dark'>
         <div className='flex flex-col min-h-screen h-full'>
           <header className="flex justify-between px-10 py-2 h-10 sm:h-12  text-white">
             <ul className="gap-4 justify-center items-center hidden sm:inline-flex">

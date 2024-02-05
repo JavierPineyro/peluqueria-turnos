@@ -4,10 +4,16 @@ import 'dayjs/locale/es'
 import "@/styles/calendar.css"
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import { Calendar, Event, dayjsLocalizer } from "react-big-calendar"
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import dayjs from "dayjs"
 
 export default function BigCalendar({ events }: { events: Event[] }) {
+
+  // usar esto para al seleccionar un evento que abra un dialog poniendo 
+  // el open a true,el dialog irá abajo del calendario y se mostrará el evento
+  const [open, setOpen] = useState(false)
+  const [selectedEvent, setselectedEvent] = useState<Event | null>(null)
+
   dayjs.locale('es')
   const labels = {
     today: "Hoy",
@@ -36,6 +42,11 @@ export default function BigCalendar({ events }: { events: Event[] }) {
     []
   )
 
+  const handleSelectEvent = (event: Event) => {
+    setselectedEvent(event)
+    setOpen(true)
+  }
+
   return (
     <div className="text-white" style={{ height: "80vh" }}>
       <Calendar
@@ -47,6 +58,7 @@ export default function BigCalendar({ events }: { events: Event[] }) {
         views={["day", "agenda"]}
         defaultView="day"
         messages={labels}
+        onDoubleClickEvent={handleSelectEvent}
         formats={{
           dayHeaderFormat: date => dayjs(date).format("ddd - DD MMMM, YYYY")
         }}

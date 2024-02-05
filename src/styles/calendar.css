@@ -33,3 +33,21 @@
 .rbc-current-time-indicator{
   background-color: rgb(219, 20, 20) !important;
 }
+
+.rbc-time-content{
+  scrollbar-color: var(--button-agenda-active-bg) var(--button-agenda-separator-color) !important;
+  scrollbar-width: auto !important;
+}
+
+.rbc-time-content::-webkit-scrollbar-track {
+  background: #f5f5f5 !important;
+  border-radius: 100px !important;
+  }
+  
+.rbc-time-content::-webkit-scrollbar-thumb {
+  border-radius: 100px !important;
+}
+
+.rbc-time-content::-webkit-scrollbar-thumb:hover {
+  background: #4fca4b !important;  
+}

@@ -11,3 +11,9 @@ export type Events = Array<{
     price: number;
   };
 }>;
+
+export type Service = {
+  id: string;
+  name: string;
+  price: number;
+};
