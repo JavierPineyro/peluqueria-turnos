@@ -22,7 +22,7 @@ export default function Dropdown({ user = "usuario" }: { user: string | undefine
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
           <DropdownMenuLabel>
-            <Link href="/dashboard/precios">Precios</Link>
+            <Link className="text-white" href="/dashboard/precios">Precios</Link>
           </DropdownMenuLabel>
         </DropdownMenuItem>
         <DropdownMenuSeparator></DropdownMenuSeparator>

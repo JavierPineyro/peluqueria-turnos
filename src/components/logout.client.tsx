@@ -16,7 +16,7 @@ export default function LogOutButton() {
   return (
     <div className="flex items-center justify-center gap-1" onClick={handleLogOut}>
       <LogOut className="mr-2 h-4 w-4" />
-      <span className="text-black">Cerrar sesión</span>
+      <span className="text-white">Cerrar sesión</span>
     </div>
   )
 }
