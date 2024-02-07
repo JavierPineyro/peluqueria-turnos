@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { cookies } from "next/headers"
 import { redirect } from 'next/navigation'
 import { Lato } from 'next/font/google'
+import Link from 'next/link'
 
 const latoFont = Lato({
   subsets: ['latin'], variable: '--font-lato', weight: ['400', '700'], display: 'swap', preload: true, adjustFontFallback: true, style: 'normal', fallback: ['Roboto', 'Arial', 'sans-serif']
@@ -33,8 +34,8 @@ export default async function DashboardLayout({
         <div className='flex flex-col min-h-screen h-full'>
           <header className="flex bg-neutral-900 justify-between px-10 py-2 h-10 sm:h-11  text-white">
             <ul className="gap-4 justify-center items-center hidden sm:inline-flex">
-              <li>Inicio</li>
-              <li>Turnos</li>
+              <li><Link href="/dashboard">Inicio</Link></li>
+              <li><Link href="/dashboard/precios">Turnos</Link></li>
               <li>Ganancias</li>
             </ul>
             <Dropdown user={user.email} />
