@@ -17,10 +17,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" >
+    <html lang="es">
       <body className={`${latoFont.className} bg-black dark`}>
         {children}
       </body>
-    </html >
+    </html>
   )
 }
