@@ -6,13 +6,28 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import { Calendar, Event, dayjsLocalizer } from "react-big-calendar"
 import { useCallback, useState } from "react"
 import dayjs from "dayjs"
+import FormUpdateModal from '@/components/form-update-turno'
 
 export default function BigCalendar({ events }: { events: Event[] }) {
 
   // usar esto para al seleccionar un evento que abra un dialog poniendo 
   // el open a true,el dialog irá abajo del calendario y se mostrará el evento
-  const [open, setOpen] = useState(false)
-  const [selectedEvent, setselectedEvent] = useState<Event | null>(null)
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedEvent, setselectedEvent] = useState<Event>({
+    title: '',
+    end: undefined,
+    start: undefined,
+    resource: {
+      id: '',
+      status: '',
+      services: {
+        id: '',
+        name: '',
+        price: 0,
+      }
+    }
+
+  })
 
   dayjs.locale('es')
   const labels = {
@@ -44,8 +59,10 @@ export default function BigCalendar({ events }: { events: Event[] }) {
 
   const handleSelectEvent = (event: Event) => {
     setselectedEvent(event)
-    setOpen(true)
+    setIsOpen(true)
   }
+
+  const closeModal = useCallback(() => setIsOpen(false), [])
 
   return (
     <div className="text-white" style={{ height: "80vh" }}>
@@ -64,6 +81,13 @@ export default function BigCalendar({ events }: { events: Event[] }) {
         }}
         min={new Date(0, 0, 0, 6, 0, 0)}
         max={new Date(0, 0, 0, 23, 0, 0)}
+      />
+      <FormUpdateModal
+        closeModal={closeModal}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        selectedEvent={selectedEvent}
+        id={selectedEvent.resource.id}
       />
     </div>
   )
