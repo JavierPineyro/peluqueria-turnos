@@ -11,14 +11,15 @@ import { Service } from "@/lib/types"
 import { cn, formatPrice } from "@/lib/utils"
 import { CalendarPlus } from 'lucide-react'
 import { SelectItem } from "./ui/select"
-import { useState } from "react"
+import { useState, useCallback } from "react"
 
 type Props = { services: Service[] }
 
 export default function CrearTurno({ services = [] }: Props) {
 
   const [isOpen, setIsOpen] = useState(false)
-  const handleClose = () => setIsOpen(false)
+  const handleClose = useCallback(() => setIsOpen(false), [])
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
