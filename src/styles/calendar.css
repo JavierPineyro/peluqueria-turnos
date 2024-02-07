@@ -8,7 +8,7 @@
 
 .rbc-timeslot-group{
   border-bottom: 1px solid var(--button-agenda-separator-color) !important;
-  min-height: 50px !important; 
+  min-height: 55px !important; 
 }
 
 .rbc-toolbar button{
@@ -50,4 +50,8 @@
 
 .rbc-time-content::-webkit-scrollbar-thumb:hover {
   background: #4fca4b !important;  
+}
+
+.rbc-event{
+  padding-top: 4px !important;
 }
