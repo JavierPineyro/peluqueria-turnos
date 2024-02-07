@@ -1,34 +1,10 @@
 Sistema turnos peluqueria
 
-POSTGRES Contraseña: peluQueria11
+POSTGRES Contraseña: 
 
-- Peluqeria le llegan turnos por whatsapp y lo pone en el sistema a mano para guardarlo con el servicio/s y precios.
-
--No deja crear turno si ya hay un turno a esa hora. Puede editar turnos
-
-- Ver lista de turnos por dia ej.
-
--Puede cancelar?? turno o editarlo para ponerlo como completado, cancelado.
 
 -Puede ver lo recaudado por dia, un total.
 
 - Puede ver lo recaudado en 1 dia, 1 semana, 1 mes, año
 
 - Puede cambiar los precios de los servicios (corte, barba).
-
-_ login usuario pass, solo admin.
-
-- Filtro para ver la tabla con turnos, por nombre y por dia
-
-
-REACT BIG CALENDAR, SUPABASE, NEXTJS, SHADCN UI
-
-
-
-Tabla Turnos
-
-id, name, service, price, Date(+horas), status (Cancelado, Pendiente, Pagado).
-
-Tabla Recaudacion ??? Esto lo puedo hacer con el Count de la tabla turnos
-
-id, fecha, monto(total)
