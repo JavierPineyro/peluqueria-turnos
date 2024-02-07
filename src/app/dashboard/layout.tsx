@@ -3,6 +3,11 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import type { Metadata } from 'next'
 import { cookies } from "next/headers"
 import { redirect } from 'next/navigation'
+import { Lato } from 'next/font/google'
+
+const latoFont = Lato({
+  subsets: ['latin'], variable: '--font-lato', weight: ['400', '700'], display: 'swap', preload: true, adjustFontFallback: true, style: 'normal', fallback: ['Roboto', 'Arial', 'sans-serif']
+})
 
 export const metadata: Metadata = {
   title: 'Club de caballeros - Turnos',
@@ -24,9 +29,9 @@ export default async function DashboardLayout({
 
   return (
     <html lang="es">
-      <body className='dark'>
+      <body suppressHydrationWarning className={`${latoFont.className} dark`}>
         <div className='flex flex-col min-h-screen h-full'>
-          <header className="flex justify-between px-10 py-2 h-10 sm:h-12  text-white">
+          <header className="flex bg-neutral-900 justify-between px-10 py-2 h-10 sm:h-11  text-white">
             <ul className="gap-4 justify-center items-center hidden sm:inline-flex">
               <li>Inicio</li>
               <li>Turnos</li>
