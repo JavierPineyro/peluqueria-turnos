@@ -17,9 +17,11 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export default function Form(
-  { children, closeModal }: { children: React.ReactNode, closeModal: () => void }
-) {
+type Props = {
+  children: React.ReactNode,
+  closeModal: () => void,
+}
+export default function Form({ children, closeModal }: Props) {
 
   return (
     <form action={async (formData: FormData) => {
