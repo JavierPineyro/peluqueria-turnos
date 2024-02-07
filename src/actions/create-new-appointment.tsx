@@ -24,7 +24,7 @@ export async function createAppointment(formData: FormData) {
   }
 
   const supabase = createServerActionClient({ cookies })
-  const res = await supabase.from("turnos").insert(appointment).select()
+  const res = await supabase.from("turnos").insert(appointment)
 
   if (res.status === 201) {
     revalidatePath("/dashboard")
