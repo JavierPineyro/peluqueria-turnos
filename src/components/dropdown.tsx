@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger
 } from "./ui/dropdown-menu";
 import LogOutButton from "@/components/logout.client";
+import { cn } from "@/lib/utils";
 
 import { Settings } from 'lucide-react'
 import Link from "next/link";
@@ -15,7 +16,7 @@ export default function Dropdown({ user = "usuario" }: { user: string | undefine
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className={cn("hover:bg-gray-800 transition-colors rounded px-2 py-1 flex items-center justify-center")}>
         <span className="text-white"> {user}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-30 sm:w-40">
