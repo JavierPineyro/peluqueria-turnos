@@ -1,5 +1,6 @@
 "use client"
 
+import { updatePrice } from "@/actions/update-service-price";
 import ButtonSubmit from "@/components/button-submit";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -12,6 +13,8 @@ import { useState } from "react";
 
 export default function FormUpdatePriceModal({ id, price, name }: Service) {
 
+  const updatePriceWithId = updatePrice.bind(null, id)
+
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -23,7 +26,10 @@ export default function FormUpdatePriceModal({ id, price, name }: Service) {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <form action="">
+        <form action={async (formData: FormData) => {
+          await updatePriceWithId(formData)
+          setIsOpen(false)
+        }}>
           <DialogHeader>
             <DialogTitle>Modificar servicio</DialogTitle>
             <DialogDescription>
@@ -32,13 +38,13 @@ export default function FormUpdatePriceModal({ id, price, name }: Service) {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="nombre" className="text-right">
+              <Label htmlFor="name" className="text-right">
                 Nombre
               </Label>
               <Input
-                id="nombre"
-                name="nombre"
-                // defaultValue={selectedEvent.title?.toString()}
+                id="name"
+                name="name"
+                defaultValue={name.toString()}
                 required
                 placeholder="Corte de pelo"
                 className="col-span-3"
@@ -52,7 +58,7 @@ export default function FormUpdatePriceModal({ id, price, name }: Service) {
                 id="price"
                 name="price"
                 type="number"
-                // defaultValue={selectedEvent.title?.toString()}
+                defaultValue={price}
                 required
                 placeholder="$2000"
                 className="col-span-3"
@@ -62,7 +68,7 @@ export default function FormUpdatePriceModal({ id, price, name }: Service) {
           <DialogFooter className={cn("w-full flex sm:justify-between")}>
             <DialogClose asChild>
               <Button type="button" variant="secondary">
-                Close
+                Cerrar
               </Button>
             </DialogClose>
             <ButtonSubmit />
