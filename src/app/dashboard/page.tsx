@@ -24,7 +24,7 @@ export default async function DashboardPage(
     .from("services")
     .select("*").order("price", { ascending: true }) as { data: Service[] }
 
-
+  console.log("DATOS DEL SERVER:", data)
   const events = mapEventResponse(data)
 
   return (
