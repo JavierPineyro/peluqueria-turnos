@@ -14,8 +14,8 @@ export function mapEventResponse(data: Events): Event[] {
   return data?.map(({ title, start, end, id, status, services }) => {
     return {
       title,
-      start: start,
-      end: end,
+      start: new Date(start),
+      end: new Date(end),
       resource: {
         id,
         status,
