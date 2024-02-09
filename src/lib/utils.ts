@@ -42,10 +42,15 @@ export function getTotal(incomes: any): number {
 }
 
 export function formatIncomeResponse(data: IncomeResponse[]) {
-  return data.map(({ id, revenue, date, id_service }) => ({
+  const filteredData = data.filter((item) => {
+    return item.turno.status === "completado";
+  });
+
+  return filteredData.map(({ id, revenue, date, id_service, turno }) => ({
     id,
     revenue,
     date,
+    status: turno.status,
     service: id_service,
   }));
 }

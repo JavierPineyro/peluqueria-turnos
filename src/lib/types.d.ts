@@ -24,5 +24,8 @@ export type IncomeResponse = {
   revenue: number
   "id_service": {
     name: string
+  },
+  turno: {
+    status: string
   }
 }
