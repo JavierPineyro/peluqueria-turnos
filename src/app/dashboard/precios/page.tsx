@@ -1,6 +1,6 @@
 import FormUpdatePriceModal from "@/components/form-update-price";
-import { Service } from "@/lib/types";
-import { formatPrice } from "@/lib/utils";
+import { IncomeResponse, Service } from "@/lib/types";
+import { formatIncomeResponse, formatPrice, getTotal } from "@/lib/utils";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import {
@@ -13,55 +13,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import dayjs from "dayjs";
+import "dayjs/locale/es"
 
 export default async function PricePage() {
 
+  dayjs.locale("es")
   const supabase = createServerComponentClient({ cookies })
+
   const { data: services } = await supabase.from("services").select("*").order('price', { ascending: true }) as { data: Service[] }
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
+
+  // Agregar filtro por que este completado el estatus de id_turno
+  const { data } = await supabase.from("incomes").select("id, revenue, date, id_service(name)").eq("date", dayjs().format("YYYY-MM-DD")) as { data: IncomeResponse[] }
+
+  const incomes = formatIncomeResponse(data)
+
   return (
     <section className="px-16 grid justify-center items-center gap-8 pt-4 mx-auto">
       <h1 className="text-lg sm:text-2xl font-semibold">Precios</h1>
@@ -79,8 +45,9 @@ export default async function PricePage() {
         }
       </section>
       <section>
+        <h2 className="text-white text-lg sm:text-2xl font-semibold">Recaudación</h2>
         <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableCaption>Recaudación del mes.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">id</TableHead>
@@ -90,19 +57,19 @@ export default async function PricePage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {invoices.map((invoice) => (
-              <TableRow key={invoice.invoice}>
-                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                <TableCell>{invoice.paymentStatus}</TableCell>
-                <TableCell>{invoice.paymentMethod}</TableCell>
-                <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+            {incomes.map((income) => (
+              <TableRow key={income.id}>
+                <TableCell className="font-medium">{income.id}</TableCell>
+                <TableCell>{dayjs(income.date).format("DD/MM/YY")}</TableCell>
+                <TableCell>{income.service.name}</TableCell>
+                <TableCell className="text-right">{formatPrice(income.revenue)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter>
             <TableRow>
               <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,500.00</TableCell>
+              <TableCell className="text-right">{formatPrice(getTotal(incomes))}</TableCell>
             </TableRow>
           </TableFooter>
         </Table>
