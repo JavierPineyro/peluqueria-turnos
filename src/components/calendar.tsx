@@ -10,8 +10,10 @@ import FormUpdateModal from '@/components/form-update-turno'
 import EventItem from './event-item'
 import utc from "dayjs/plugin/utc"
 import timezone from "dayjs/plugin/timezone"
+import "dayjs/locale/es"
+import { Events } from '@/lib/types'
 
-export default function BigCalendar({ events }: { events: Event[] }) {
+export default function BigCalendar({ eventsList }: { eventsList: Events }) {
 
   const [isOpen, setIsOpen] = useState(false)
   const [selectedEvent, setselectedEvent] = useState<Event>({
@@ -29,12 +31,32 @@ export default function BigCalendar({ events }: { events: Event[] }) {
     }
 
   })
+
+  dayjs.locale("es")
   dayjs.extend(utc)
   dayjs.extend(timezone)
   dayjs.tz.setDefault("America/Argentina/Buenos_Aires")
   const localizer = dayjsLocalizer(dayjs)
-  console.log("------------")
-  console.log("events", events)
+
+  const events = eventsList.map(event => {
+    return {
+      title: event.title?.toString(),
+      start: new Date(dayjs.tz(event.start).toString()),
+      end: new Date(dayjs.tz(event.end).toString()),
+      createdAt: new Date(dayjs.tz(event.createdAt).toString()),
+      resource: {
+        status: event.status.toString(),
+        id: event.id.toString(),
+        services: {
+          id: event.services.id.toString(),
+          name: event.services.name.toString(),
+          price: event.services.price,
+        }
+      }
+    }
+  })
+
+  console.log("EVENTOS", events)
 
   const eventPropGetter = useCallback(
     (event: Event, start: Date, end: Date, isSelected: boolean) => {

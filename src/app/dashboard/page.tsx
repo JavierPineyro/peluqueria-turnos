@@ -15,7 +15,7 @@ export default async function DashboardPage(
   const minDate = dayjs().subtract(DAYS, "day").format()
 
   const supabase = createServerComponentClient({ cookies })
-  const { data } = await supabase
+  const { data: events } = await supabase
     .from("turnos")
     .select("*, services(*)")
     .gt("start", minDate) as { data: Events }
@@ -24,8 +24,7 @@ export default async function DashboardPage(
     .from("services")
     .select("*").order("price", { ascending: true }) as { data: Service[] }
 
-  console.log("DATOS DEL SERVER:", data)
-  const events = mapEventResponse(data)
+  // const events = mapEventResponse(data)
 
   return (
     <section className="grid items-center p-3">
@@ -33,7 +32,7 @@ export default async function DashboardPage(
         <h1 className="text-white font-semibold text-md">Calendario</h1>
         <CrearTurno services={services} />
       </div>
-      <Calendar events={events} />
+      <Calendar eventsList={events} />
     </section>
   )
 }

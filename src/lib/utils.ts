@@ -18,8 +18,14 @@ export function mapEventResponse(data: Events): Event[] {
   return data?.map(({ title, start, end, id, status, services }) => {
     return {
       title,
-      start: dayjs.tz(new Date(start).toString()).toDate(),
-      end: dayjs.tz(new Date(end).toString()).toDate(),
+      start: dayjs
+        .tz(new Date(start).toString())
+        .tz("America/Argentina/Buenos_Aires")
+        .toDate(),
+      end: dayjs
+        .tz(new Date(end).toString())
+        .tz("America/Argentina/Buenos_Aires")
+        .toDate(),
       resource: {
         id,
         status,
