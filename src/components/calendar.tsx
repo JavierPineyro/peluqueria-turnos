@@ -8,6 +8,8 @@ import { useCallback, useState } from "react"
 import dayjs from "dayjs"
 import FormUpdateModal from '@/components/form-update-turno'
 import EventItem from './event-item'
+import utc from "dayjs/plugin/utc"
+import timezone from "dayjs/plugin/timezone"
 
 export default function BigCalendar({ events }: { events: Event[] }) {
 
@@ -27,7 +29,10 @@ export default function BigCalendar({ events }: { events: Event[] }) {
     }
 
   })
-
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
+  dayjs.tz.setDefault("America/Argentina/Buenos_Aires")
+  const localizer = dayjsLocalizer(dayjs)
   console.log("------------")
   console.log("events", events)
 
@@ -75,7 +80,7 @@ export default function BigCalendar({ events }: { events: Event[] }) {
         eventPropGetter={eventPropGetter}
         events={events}
         length={1}
-        localizer={dayjsLocalizer(dayjs)}
+        localizer={localizer}
         max={new Date(0, 0, 0, 23, 0, 0)}
         messages={labels}
         min={new Date(0, 0, 0, 6, 0, 0)}

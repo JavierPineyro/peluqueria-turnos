@@ -2,17 +2,24 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { type IncomeResponse, type Events } from "./types";
 import { type Event } from "react-big-calendar";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import dayjs from "dayjs";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("America/Argentina/Buenos_Aires");
+
 export function mapEventResponse(data: Events): Event[] {
   return data?.map(({ title, start, end, id, status, services }) => {
     return {
       title,
-      start: new Date(start),
-      end: new Date(end),
+      start: dayjs.tz(new Date(start).toString()).toDate(),
+      end: dayjs.tz(new Date(end).toString()).toDate(),
       resource: {
         id,
         status,
