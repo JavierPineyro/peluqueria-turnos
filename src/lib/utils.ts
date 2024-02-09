@@ -14,8 +14,8 @@ export function mapEventResponse(data: Events): Event[] {
   return data?.map(({ title, start, end, id, status, services }) => {
     return {
       title,
-      start: new Date(start),
-      end: new Date(end),
+      start: dayjs(new Date(start).toString()).toDate(),
+      end: dayjs(new Date(end).toString()).toDate(),
       resource: {
         id,
         status,
