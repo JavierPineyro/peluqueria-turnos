@@ -27,9 +27,9 @@ export default async function DashboardPage(
   // const events = mapEventResponse(data)
 
   return (
-    <section className="grid items-center p-3">
-      <div className="flex justify-between items-center">
-        <h1 className="text-white font-semibold text-md">Calendario</h1>
+    <section className="grid items-center p-1 sm:p-3">
+      <div className="flex gap-3 sm:justify-between items-center">
+        <h1 className="text-white font-semibold text-sm sm:text-md">Calendario</h1>
         <CrearTurno services={services} />
       </div>
       <Calendar eventsList={events} />

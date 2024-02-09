@@ -32,8 +32,8 @@ export default async function DashboardLayout({
     <html lang="es">
       <body suppressHydrationWarning className={`${latoFont.className} dark`}>
         <div className='flex flex-col min-h-screen h-full'>
-          <header className="flex bg-neutral-900 justify-between px-10 py-2 h-10 sm:h-11  text-white">
-            <ul className="gap-4 justify-center items-center hidden sm:inline-flex">
+          <header className="flex bg-neutral-900 justify-between px-4 sm:px-10 py-2 h-10 sm:h-11  text-white">
+            <ul className="gap-1 sm:gap-4 justify-center items-center sm:inline-flex">
               <li><Link className='hover:bg-gray-800 rounded transition-colors px-2 py-1 flex items-center justify-center' href="/dashboard">Inicio</Link></li>
               <li><Link className='hover:bg-gray-800 rounded transition-colors px-2 py-1 flex items-center justify-center' href="/dashboard/precios">Precios</Link></li>
             </ul>
