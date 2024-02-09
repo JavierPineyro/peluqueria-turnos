@@ -29,9 +29,9 @@ export default function BigCalendar({ events }: { events: Event[] }) {
   })
 
   dayjs.locale('es')
-  console.log("date server", dayjs())
+  console.log("date server", dayjs().toDate())
   console.log("------------")
-  console.log("date client", dayjs().locale('es'))
+  console.log("date client", dayjs().locale('es').toDate())
   console.log("------------")
   console.log("events", events)
 
