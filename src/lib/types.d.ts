@@ -17,3 +17,12 @@ export type Service = {
   name: string;
   price: number;
 };
+
+export type IncomeResponse = {
+  id: number
+  date: Date
+  revenue: number
+  "id_service": {
+    name: string
+  }
+}

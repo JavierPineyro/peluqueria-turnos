@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { type Events } from "./types";
+import { type IncomeResponse, type Events } from "./types";
 import { type Event } from "react-big-calendar";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
@@ -36,3 +36,44 @@ export function formatPrice(price: number) {
     maximumSignificantDigits: 4,
   });
 }
+
+export function getTotal(incomes: any): number {
+  return incomes.reduce((acc: number, income: any) => acc + income.revenue, 0);
+}
+
+export function formatIncomeResponse(data: IncomeResponse[]) {
+  return data.map(({ id, revenue, date, id_service }) => ({
+    id,
+    revenue,
+    date,
+    service: id_service,
+  }));
+}
+
+// Mocks
+const invoices = [
+  {
+    id: 1,
+    date: new Date("2024-02-01"),
+    price: 1500,
+    service: {
+      name: "Corte de cabello",
+    },
+  },
+  {
+    id: 2,
+    date: new Date("2024-02-02"),
+    price: 1000,
+    service: {
+      name: "Barba",
+    },
+  },
+  {
+    id: 3,
+    date: new Date("2024-02-02"),
+    price: 2500,
+    service: {
+      name: "Corte de cabello",
+    },
+  },
+];
