@@ -24,12 +24,12 @@ export default async function PricePage() {
   const { data: services } = await supabase.from("services").select("*").order('price', { ascending: true }) as { data: Service[] }
 
   // Agregar filtro por que este completado el estatus de id_turno
-  const { data } = await supabase.from("incomes").select("id, revenue, date, id_service(name)").eq("date", dayjs().format("YYYY-MM-DD")) as { data: IncomeResponse[] }
+  const { data } = await supabase.from("incomes").select("id, revenue, date, id_service(name), turno:id_turno(status)").eq("date", dayjs(new Date()).format("YYYY-MM-DD")) as { data: IncomeResponse[] }
 
   const incomes = formatIncomeResponse(data)
 
   return (
-    <section className="px-16 grid justify-center items-center gap-8 pt-4 mx-auto">
+    <section className="px-16 grid justify-center items-center gap-8 pt-4 mx-auto" >
       <h1 className="text-lg sm:text-2xl font-semibold">Precios</h1>
       <section className="grid gap-2 sm:gap-9 sm:grid-cols-3">
         {
@@ -53,6 +53,7 @@ export default async function PricePage() {
               <TableHead className="w-[100px]">id</TableHead>
               <TableHead>fecha</TableHead>
               <TableHead>servicio</TableHead>
+              <TableHead>Estado</TableHead>
               <TableHead className="text-right">Monto</TableHead>
             </TableRow>
           </TableHeader>
@@ -62,18 +63,19 @@ export default async function PricePage() {
                 <TableCell className="font-medium">{income.id}</TableCell>
                 <TableCell>{dayjs(income.date).format("DD/MM/YY")}</TableCell>
                 <TableCell>{income.service.name}</TableCell>
+                <TableCell>{income.status}</TableCell>
                 <TableCell className="text-right">{formatPrice(income.revenue)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
+              <TableCell colSpan={4}>Total</TableCell>
               <TableCell className="text-right">{formatPrice(getTotal(incomes))}</TableCell>
             </TableRow>
           </TableFooter>
         </Table>
       </section>
-    </section>
+    </section >
   )
 }
