@@ -24,6 +24,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import dayjs from "dayjs"
 
 type Props = {
   closeModal: () => void,
@@ -36,6 +37,12 @@ export default function FormUpdateModal(props: Props) {
 
   const { closeModal, setIsOpen, isOpen, selectedEvent, id } = props
   const updateAppointmentWithId = updateAppointment.bind(null, id)
+
+  function formatDateTime(date: Date | undefined) {
+    let draft = dayjs(date).toDate()
+    let fixedDate = new Date(draft.getTime() - draft.getTimezoneOffset() * 60000)
+    return fixedDate.toISOString().slice(0, -5)
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -72,6 +79,7 @@ export default function FormUpdateModal(props: Props) {
               <Input
                 id="start"
                 name="start"
+                defaultValue={formatDateTime(selectedEvent.start)}
                 required
                 type="datetime-local"
                 className="col-span-3"
@@ -85,6 +93,7 @@ export default function FormUpdateModal(props: Props) {
                 id="end"
                 name="end"
                 required
+                defaultValue={formatDateTime(selectedEvent.end)}
                 type="datetime-local"
                 className="col-span-3"
               />

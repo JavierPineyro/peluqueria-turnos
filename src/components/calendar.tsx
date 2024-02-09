@@ -56,8 +56,6 @@ export default function BigCalendar({ eventsList }: { eventsList: Events }) {
     }
   })
 
-  console.log("EVENTOS", events)
-
   const eventPropGetter = useCallback(
     (event: Event, start: Date, end: Date, isSelected: boolean) => {
       return {

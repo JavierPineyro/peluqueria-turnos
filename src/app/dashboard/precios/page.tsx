@@ -29,9 +29,9 @@ export default async function PricePage() {
   const incomes = formatIncomeResponse(data)
 
   return (
-    <section className="px-16 grid justify-center items-center gap-8 pt-4 mx-auto" >
-      <h1 className="text-lg sm:text-2xl font-semibold">Precios</h1>
-      <section className="grid gap-2 sm:gap-9 sm:grid-cols-3">
+    <section className="px-4 sm:px-16 grid justify-center items-center gap-8 pt-4 mx-auto" >
+      <h1 className="text-md sm:text-2xl font-semibold">Precios</h1>
+      <section className="grid gap-2 sm:gap-9 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {
           services.map(service => (
             <div key={service.id} className="bg-neutral-900 text-white py-1 px-1 sm:px-3 sm:py-4 rounded shadow-md shadow-gray-800/40 w-full h-36 sm:w-72 flex flex-col justify-between">
@@ -50,7 +50,7 @@ export default async function PricePage() {
           <TableCaption>Recaudación del mes.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">id</TableHead>
+              <TableHead className="w-[50px] sm:w-[100px]">id</TableHead>
               <TableHead>fecha</TableHead>
               <TableHead>servicio</TableHead>
               <TableHead>Estado</TableHead>
