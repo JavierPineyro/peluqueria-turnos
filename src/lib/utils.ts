@@ -2,14 +2,11 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { type IncomeResponse, type Events } from "./types";
 import { type Event } from "react-big-calendar";
-import dayjs from "dayjs";
-import "dayjs/locale/es";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-dayjs.locale("es");
 export function mapEventResponse(data: Events): Event[] {
   return data?.map(({ title, start, end, id, status, services }) => {
     return {
