@@ -29,6 +29,11 @@ export default function BigCalendar({ events }: { events: Event[] }) {
   })
 
   dayjs.locale('es')
+  console.log("date server", dayjs())
+  console.log("------------")
+  console.log("date client", dayjs().locale('es'))
+  console.log("------------")
+  console.log("events", events)
 
   const eventPropGetter = useCallback(
     (event: Event, start: Date, end: Date, isSelected: boolean) => {
