@@ -24,7 +24,7 @@ export default async function PricePage() {
   const { data: services } = await supabase.from("services").select("*").order('price', { ascending: true }) as { data: Service[] }
 
   // Agregar filtro por que este completado el estatus de id_turno
-  const { data } = await supabase.from("incomes").select("id, revenue, date, id_service(name), turno:id_turno(status)").eq("date", dayjs(new Date()).format("YYYY-MM-DD")) as unknown as { data: IncomeResponse[] }
+  const { data } = await supabase.from("incomes").select("id, revenue, date, id_service(name), turno:id_turno(status)").eq("date", dayjs.tz(new Date()).format("YYYY-MM-DD")) as unknown as { data: IncomeResponse[] }
 
   const incomes = formatIncomeResponse(data)
 
