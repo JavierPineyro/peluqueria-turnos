@@ -29,15 +29,7 @@ export default function CrearTurno({ services = [] }: Props) {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <Form closeModal={handleClose}>
-          {
-            services.map(item => (
-              <SelectItem key={item.id} value={item.id}>
-                {item.name} - {formatPrice(item.price)}
-              </SelectItem>
-            ))
-          }
-        </Form>
+        <Form services={services} closeModal={handleClose} />
       </DialogContent>
     </Dialog>
   )
