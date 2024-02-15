@@ -47,12 +47,12 @@ export default async function PricePage() {
       <section>
         <h2 className="text-white text-lg sm:text-2xl font-semibold">Recaudación</h2>
         <Table>
-          <TableCaption>Recaudación del mes.</TableCaption>
+          <TableCaption>Recaudación del día.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[50px] sm:w-[100px]">id</TableHead>
-              <TableHead>fecha</TableHead>
-              <TableHead>servicio</TableHead>
+              <TableHead className="w-[50px] sm:w-[100px]">Id</TableHead>
+              <TableHead>Fecha</TableHead>
+              <TableHead>Servicio</TableHead>
               <TableHead>Estado</TableHead>
               <TableHead className="text-right">Monto</TableHead>
             </TableRow>
