@@ -14,12 +14,12 @@ export default function ErrorPage({ error, reset }: Props) {
         Algo salió Mal
       </h1>
       <div className="flex gap-4">
-        <Link
-          className="text-lg font-bold underline underline-offset-4 hover:text-blue-500 transition-colors duration-200"
-          href="/dashboard">
-          Inicio
-        </Link>
-        <Button variant="secondary" onClick={reset}>Intentar de nuevo</Button>
+        <Button asChild>
+          <Link href="/dashboard">Inicio</Link>
+        </Button>
+        <Button variant="secondary" onClick={reset}>
+          Intentar de nuevo
+        </Button>
       </div>
       <p className="text-2xl font-bold tracking-tight sm:text-[2rem]">
         ¡Lo sentimos! Vuelve e inténtalo más tarde</p>
