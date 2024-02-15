@@ -10,6 +10,7 @@ import { Service } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Settings } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function FormUpdatePriceModal({ id, price, name }: Service) {
 
@@ -27,8 +28,13 @@ export default function FormUpdatePriceModal({ id, price, name }: Service) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form action={async (formData: FormData) => {
-          await updatePriceWithId(formData)
-          setIsOpen(false)
+          const result = await updatePriceWithId(formData)
+          if (result?.message) {
+            toast.error(result.message)
+          } else {
+            toast.success("Servicio modificado correctamente")
+            setIsOpen(false)
+          }
         }}>
           <DialogHeader>
             <DialogTitle>Modificar servicio</DialogTitle>
