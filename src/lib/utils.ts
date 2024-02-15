@@ -65,6 +65,21 @@ export function formatIncomeResponse(data: IncomeResponse[]) {
   }));
 }
 
+export function getErrorMessage(error: unknown): string {
+  let message: string;
+
+  if (error instanceof Error) {
+    message = error.message;
+  } else if (typeof error === "string") {
+    message = error;
+  } else if (error && typeof error === "object" && "message" in error) {
+    message = String(error.message);
+  } else {
+    message = "Algo salió mal, inténtalo más tarde";
+  }
+  return message;
+}
+
 // Mocks
 const invoices = [
   {
