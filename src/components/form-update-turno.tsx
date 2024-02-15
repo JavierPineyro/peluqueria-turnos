@@ -25,6 +25,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import dayjs from "dayjs"
+import { toast } from "sonner"
 
 type Props = {
   closeModal: () => void,
@@ -49,8 +50,13 @@ export default function FormUpdateModal(props: Props) {
       <DialogTrigger asChild></DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form action={async (formData: FormData) => {
-          await updateAppointmentWithId(formData)
-          closeModal()
+          const result = await updateAppointmentWithId(formData)
+          if (result?.message) {
+            toast.error(result?.message)
+          } else {
+            toast.success('Turno actualizado')
+            closeModal()
+          }
         }}>
           <DialogHeader>
             <DialogTitle>Crear nuevo turno</DialogTitle>
