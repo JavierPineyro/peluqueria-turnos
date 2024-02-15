@@ -1,5 +1,6 @@
 "use server";
 
+import { getErrorMessage } from "@/lib/utils";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import dayjs from "dayjs";
 import { revalidatePath } from "next/cache";
@@ -45,7 +46,7 @@ export async function updateAppointment(id: string, formData: FormData) {
   } catch (error) {
     console.error(error);
     return {
-      message: error.message,
+      message: getErrorMessage(error),
     };
   }
 }

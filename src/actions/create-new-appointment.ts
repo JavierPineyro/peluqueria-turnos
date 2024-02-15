@@ -1,25 +1,11 @@
 "use server";
 
+import { getErrorMessage } from "@/lib/utils";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import dayjs from "dayjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
-function getErrorMessage(error: unknown): string {
-  let message: string;
-
-  if (error instanceof Error) {
-    message = error.message;
-  } else if (typeof error === "string") {
-    message = error;
-  } else if (error && typeof error === "object" && "message" in error) {
-    message = String(error.message);
-  } else {
-    message = "Algo salió mal, inténtalo más tarde";
-  }
-  return message;
-}
 
 export async function createAppointment(formData: FormData) {
   try {
