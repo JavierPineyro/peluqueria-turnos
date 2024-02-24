@@ -67,7 +67,9 @@ export default function LoginPage() {
   if (user) {
     return (
       <main className='text-white h-screen flex flex-col justify-center items-center gap-3 bg-gray-800 p-4'>
-        <h1>Ya iniciaste sesion, ve al <Button className={cn("font-semibold text-base text-white")} variant="link" asChild><Link href="/">Inicio</Link></Button></h1>
+        <h1>Ya iniciaste sesion, ve al <Button className={cn("font-semibold text-base text-white")} variant="outline" asChild>
+          <Link href="/">Inicio</Link></Button>
+        </h1>
         <Button variant="secondary" onClick={handleSignOut}>Cerrar sesion</Button>
       </main>
     )
@@ -103,8 +105,8 @@ export default function LoginPage() {
         </div>
 
         <div className='grid items-center space-y-2'>
-          <Button disabled={isDisabled} className={cn("bg-blue-700 hover:bg-blue-900 focus:bg-blue-800")} onClick={handleSignIn}>Iniciar Sesión</Button>
-          <Button disabled={true} variant="outline" onClick={handleSignUp}>Registrarse</Button>
+          <Button disabled={isDisabled} className={cn("bg-blue-700 hover:bg-blue-900 focus:bg-blue-800 text-white font-semibold")} onClick={handleSignIn}>Iniciar Sesión</Button>
+          <Button disabled={false} variant="outline" onClick={handleSignUp}>Registrarse</Button>
         </div>
       </div>
     </main>
